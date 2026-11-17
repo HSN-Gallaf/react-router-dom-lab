@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const CreateProduct = () => {
     price: "",
     quantity: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -21,14 +24,7 @@ const CreateProduct = () => {
         `${import.meta.env.VITE_BASE_URL}/products`,
         formData,
       );
-
-      setFormData({
-        title: "",
-        description: "",
-        category: "",
-        price: "",
-        quantity: "",
-      });
+      navigate(`/products/${response.data._id}`);
     } catch (err) {
       console.log("Error Message: ", err);
     }
