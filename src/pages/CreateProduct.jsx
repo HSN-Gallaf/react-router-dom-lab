@@ -16,18 +16,22 @@ const CreateProduct = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/products`,
-      formData,
-    );
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/products`,
+        formData,
+      );
 
-    setFormData({
-      title: "",
-      description: "",
-      category: "",
-      price: "",
-      quantity: "",
-    });
+      setFormData({
+        title: "",
+        description: "",
+        category: "",
+        price: "",
+        quantity: "",
+      });
+    } catch (err) {
+      console.log("Error Message: ", err);
+    }
   };
 
   return (

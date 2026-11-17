@@ -8,11 +8,15 @@ const ProductsDetails = () => {
   const { id } = useParams();
 
   const getProduct = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/products/${id}`,
-    );
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/products/${id}`,
+      );
 
-    setProduct(response.data);
+      setProduct(response.data);
+    } catch (err) {
+      console.log("Error Message: ", err);
+    }
   };
 
   useEffect(() => {

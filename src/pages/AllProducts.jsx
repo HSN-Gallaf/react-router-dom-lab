@@ -7,11 +7,15 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
 
   const getAllProducts = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/products`,
-    );
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/products`,
+      );
 
-    setProducts(response.data);
+      setProducts(response.data);
+    } catch (err) {
+      console.log("Error Message: ", err);
+    }
   };
   useEffect(() => {
     getAllProducts();
